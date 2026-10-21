@@ -10,11 +10,11 @@ wait several seconds.
 On Google Cloud SEV-SNP (`n2d-standard-2`, EPYC Milan) a report alone takes 7.6–8.2 ms, and when reports are
 requested back to back every tenth one waits about 10.2 s: 19 or 20 of 200 in each run, in the runs of
 5 October 2026 in `evidence/` beside this file (`snp-ioctl.json`: 19 stalls of 200, median 7.67 ms otherwise;
-`tsm.json`: 20 of 200, 7.96 ms) in the run of 13 October 2026 made with the scripts of this repository (`evidence/20261013T143538Z-gcp-sev-snp-report-rate`:
-19 and 20 stalls of 200, 10.23–10.23 s each, 7.96 and 8.0 ms otherwise), in the run of 21 October 2026 made from this repository
+`tsm.json`: 20 of 200, 7.96 ms), in the run of 13 October 2026 made with the scripts of this repository (`evidence/20261013T143538Z-gcp-sev-snp-report-rate`:
+19 and 20 stalls of 200, 10.23–10.25 s each, 7.96 and 8.0 ms otherwise), in the run of 21 October 2026 made from this repository
 (`evidence/20261021T012158Z-gcp-sev-snp-report-rate`: 19 and 20 stalls of 200, 10.22–10.24 s each, 7.97 ms otherwise), and in the five runs of 26 and 30 September 2026 recorded in
 github.com/nikolaichuk7/tacra-est (`docs/RESULTS.md`, Section 4, and `drills.json` of each run). On AWS
-SEV-SNP (`c6a.large`) there was no stall in 200 requests, 7 ms each; on Google Cloud TDX none, 38.8 ms each;
+SEV-SNP (`c6a.large`) there was no stall in 200 requests, 7 ms each; on Google Cloud TDX none, about 39 to 42 ms each;
 on Azure under the paravisor a per-request value reaches the hardware report about once per 2 to 3 s
 ([report-rate.md](report-rate.md)).
 
