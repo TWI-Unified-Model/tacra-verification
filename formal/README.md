@@ -6,7 +6,7 @@ Evidence"; `gen.py` writes them from one template, so that the variants differ o
 that change between them. `results/` holds the ProVerif 2.05 output, unedited, of the runs of
 26 and 30 September 2026 and of the rerun of 13 October 2026 that produced the same 62 verdicts.
 
-How the names map to the drafts and to this repository's code:
+How the names map to the drafts and to the TWI SIG's EST server (TWI-Unified-Model/globalsign-est, master 623c197 of 13 October 2026):
 
 - `srv`, `sid`, `id` in a model, and "server" in the tables below, are the identifier of the
   Relying Party that will rely on the Evidence: the `rp_id` of TACRA Section 4.5 as that section
@@ -14,8 +14,8 @@ How the names map to the drafts and to this repository's code:
   models was kept so that the recorded results stay the tool's own.
 - The `-norrp` models bind the freshness element, the Target and the subject and no identifier:
   `h((n, tgt, csr))` with a Handle, `h((ep, tgt, csr))` with an epoch marker, `h((ts, tgt, csr))`
-  with the Attester's timestamp. That is the binding this repository's server computes
-  (`internal/tacra/binding.go`), as the group decided on 6 and 11 October 2026; whether the
+  with the Attester's timestamp. That is the binding the EST server computes
+  ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)), as the group decided on 6 and 11 October 2026; whether the
   identifier returns to Section 4.5 is TheBankster/rats-tacra#20.
 - `enrollment-bind.pv` and the `-rrp-configured` models bind the identifier as well,
   `h((n, sid, tgt, csr))`: Section 4.5 as it stands. `enrollment-nobind.pv`, `h((n, csr))`, is
@@ -24,7 +24,7 @@ How the names map to the drafts and to this repository's code:
   the container with origin authentication (HPKE `mode_auth`), `retrieval-base.pv` the container
   of draft -00, encrypted to CEKpub alone.
 
-The verdicts of the `-norrp` rows are what the measurements on hardware found for this code
+The verdicts of the `-norrp` rows are what the measurements on hardware found for that binding
 (TheBankster/rats-tacra#20, 7–8 October 2026): without an identifier, the same Evidence is accepted
 by two Relying Parties that share the freshness value (U1 false), and only a Handle one Relying
 Party originated keeps it to that one.
@@ -196,5 +196,6 @@ the version, the date and each model.
 The file `proverif-20261013T142417Z-rerun.txt` is the full output of the rerun of 13 October
 2026 on the models as generated that day: the same 62 verdicts.
 
-The models and this text are by Serhii Nikolaichuk (Copyright 2026), contributed to this repository
-under its MIT licence; they were first published in github.com/nikolaichuk7/tacra-est.
+The models and this text are by Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0
+licence; they were first published in github.com/nikolaichuk7/tacra-est and offered to the TWI SIG in
+TWI-Unified-Model/globalsign-est pull request #7 (2e08899), from which this repository was made.

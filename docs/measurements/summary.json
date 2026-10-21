@@ -1,0 +1,450 @@
+{
+ "20261005T142729Z-aws-sev-snp-report-rate": {
+  "snp-ioctl": {
+   "gap_between_stalls": [],
+   "host": "ip-172-31-4-181",
+   "n": 200,
+   "reports_per_s": 142.857,
+   "retry_sleeps_per_stall": [],
+   "run": "20261005T142830Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 1.4,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 7.84,
+   "unstalled_median_ms": 6.99,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 7.52,
+   "wall_clock_s": 1.4
+  },
+  "tsm": {
+   "gap_between_stalls": [],
+   "host": "ip-172-31-4-181",
+   "n": 200,
+   "reports_per_s": 133.333,
+   "retry_sleeps_per_stall": [],
+   "run": "20261005T142831Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 1.5,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 8.83,
+   "unstalled_median_ms": 7.87,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 8.2,
+   "wall_clock_s": 1.5
+  }
+ },
+ "20261005T142942Z-azure-sev-snp-report-rate": {
+  "azure-hcl": {
+   "gap_between_stalls": [
+    2,
+    3
+   ],
+   "host": "rr-snp",
+   "n": 200,
+   "reports_per_s": 1.741,
+   "retry_sleeps_per_stall": [
+    0
+   ],
+   "run": "20261005T143342Z",
+   "stall_max_s": 1.68,
+   "stall_min_s_excluding_first": 1.23,
+   "stalled_indices_first": [
+    68,
+    70,
+    73
+   ],
+   "stalled_n": 53,
+   "sum_of_calls_s": 114.8,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 865.54,
+   "unstalled_median_ms": 395.69,
+   "unstalled_n": 147,
+   "unstalled_p95_ms": 837.5,
+   "wall_clock_s": 114.9
+  },
+  "snp-ioctl": {
+   "host": "rr-snp",
+   "mode": "snp-ioctl",
+   "n": 0,
+   "not_available": "[Errno 2] No such file or directory: '/dev/sev-guest'",
+   "run": "20261005T143342Z"
+  },
+  "tsm": {
+   "host": "rr-snp",
+   "mode": "tsm",
+   "n": 0,
+   "not_available": "[Errno 6] No such device or address: '/sys/kernel/config/tsm/report/burst-7758f30d6e20'",
+   "run": "20261005T143342Z"
+  },
+  "vtpm-quote": {
+   "gap_between_stalls": [],
+   "host": "rr-snp",
+   "n": 200,
+   "reports_per_s": 21.978,
+   "retry_sleeps_per_stall": [],
+   "run": "20261005T143146Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 9.1,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 54.31,
+   "unstalled_median_ms": 45.36,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 46.39,
+   "wall_clock_s": 9.1
+  }
+ },
+ "20261005T143829Z-azure-sev-snp-report-rate": {
+  "azure-hcl": {
+   "gap_between_stalls": [
+    2,
+    3
+   ],
+   "host": "rr-snp",
+   "n": 200,
+   "reports_per_s": 1.678,
+   "retry_sleeps_per_stall": [
+    0
+   ],
+   "run": "20261005T144245Z",
+   "stall_max_s": 1.69,
+   "stall_min_s_excluding_first": 1.23,
+   "stalled_indices_first": [
+    67,
+    70,
+    72
+   ],
+   "stalled_n": 54,
+   "sum_of_calls_s": 119.1,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 857.09,
+   "unstalled_median_ms": 405.56,
+   "unstalled_n": 146,
+   "unstalled_p95_ms": 839.31,
+   "wall_clock_s": 119.2
+  },
+  "azure-hcl-fresh": {
+   "every_call_above_stall_threshold": true,
+   "host": "rr-snp",
+   "max_ms": 2169.47,
+   "median_ms": 2017.49,
+   "mode": "azure-hcl-fresh",
+   "n": 100,
+   "p95_ms": 2065.42,
+   "reports_per_s": 0.497,
+   "run": "20261005T144606Z",
+   "wall_clock_s": 201.1
+  },
+  "snp-ioctl": {
+   "host": "rr-snp",
+   "mode": "snp-ioctl",
+   "n": 0,
+   "not_available": "[Errno 2] No such file or directory: '/dev/sev-guest'",
+   "run": "20261005T144606Z"
+  },
+  "tsm": {
+   "host": "rr-snp",
+   "mode": "tsm",
+   "n": 0,
+   "not_available": "[Errno 6] No such device or address: '/sys/kernel/config/tsm/report/burst-a77538bef06a'",
+   "run": "20261005T144606Z"
+  },
+  "vtpm-quote": {
+   "gap_between_stalls": [],
+   "host": "rr-snp",
+   "n": 200,
+   "reports_per_s": 20.408,
+   "retry_sleeps_per_stall": [],
+   "run": "20261005T144045Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 9.8,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 205.66,
+   "unstalled_median_ms": 45.69,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 46.99,
+   "wall_clock_s": 9.8
+  }
+ },
+ "20261005T144514Z-gcp-sev-snp-report-rate": {
+  "snp-ioctl": {
+   "gap_between_stalls": [
+    10
+   ],
+   "host": "report-rate-sev-snp-2610051445",
+   "n": 200,
+   "reports_per_s": 1.021,
+   "retry_sleeps_per_stall": [
+    5
+   ],
+   "run": "20261005T145007Z",
+   "stall_max_s": 10.24,
+   "stall_min_s_excluding_first": 10.23,
+   "stalled_indices_first": [
+    11,
+    21,
+    31
+   ],
+   "stalled_n": 19,
+   "sum_of_calls_s": 195.8,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 9.09,
+   "unstalled_median_ms": 7.67,
+   "unstalled_n": 181,
+   "unstalled_p95_ms": 8.1,
+   "wall_clock_s": 195.8
+  },
+  "tsm": {
+   "gap_between_stalls": [
+    10
+   ],
+   "host": "report-rate-sev-snp-2610051445",
+   "n": 200,
+   "reports_per_s": 0.97,
+   "retry_sleeps_per_stall": [
+    5
+   ],
+   "run": "20261005T145333Z",
+   "stall_max_s": 10.23,
+   "stall_min_s_excluding_first": 10.23,
+   "stalled_indices_first": [
+    1,
+    11,
+    21
+   ],
+   "stalled_n": 20,
+   "sum_of_calls_s": 206.1,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 8.84,
+   "unstalled_median_ms": 7.96,
+   "unstalled_n": 180,
+   "unstalled_p95_ms": 8.39,
+   "wall_clock_s": 206.1
+  }
+ },
+ "20261005T145025Z-gcp-tdx-report-rate": {
+  "tsm": {
+   "gap_between_stalls": [],
+   "host": "report-rate-tdx-2610051450",
+   "n": 200,
+   "reports_per_s": 25.316,
+   "retry_sleeps_per_stall": [],
+   "run": "20261005T145127Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 7.8,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 43.38,
+   "unstalled_median_ms": 38.77,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 41.56,
+   "wall_clock_s": 7.9
+  }
+ },
+ "20261013T143538Z-gcp-sev-snp-report-rate": {
+  "snp-ioctl": {
+   "gap_between_stalls": [
+    10
+   ],
+   "host": "report-rate-sev-snp-2610131435",
+   "n": 200,
+   "reports_per_s": 1.021,
+   "retry_sleeps_per_stall": [
+    5
+   ],
+   "run": "20261013T144036Z",
+   "stall_max_s": 10.25,
+   "stall_min_s_excluding_first": 10.23,
+   "stalled_indices_first": [
+    11,
+    21,
+    31
+   ],
+   "stalled_n": 19,
+   "sum_of_calls_s": 195.9,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 9.46,
+   "unstalled_median_ms": 7.96,
+   "unstalled_n": 181,
+   "unstalled_p95_ms": 8.33,
+   "wall_clock_s": 195.9
+  },
+  "tsm": {
+   "gap_between_stalls": [
+    10
+   ],
+   "host": "report-rate-sev-snp-2610131435",
+   "n": 200,
+   "reports_per_s": 0.97,
+   "retry_sleeps_per_stall": [
+    5
+   ],
+   "run": "20261013T144402Z",
+   "stall_max_s": 10.23,
+   "stall_min_s_excluding_first": 10.23,
+   "stalled_indices_first": [
+    1,
+    11,
+    21
+   ],
+   "stalled_n": 20,
+   "sum_of_calls_s": 206.1,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 8.62,
+   "unstalled_median_ms": 8.0,
+   "unstalled_n": 180,
+   "unstalled_p95_ms": 8.46,
+   "wall_clock_s": 206.1
+  }
+ },
+ "20261013T144517Z-aws-sev-snp-report-rate": {
+  "snp-ioctl": {
+   "gap_between_stalls": [],
+   "host": "ip-172-31-6-60",
+   "n": 200,
+   "reports_per_s": 142.857,
+   "retry_sleeps_per_stall": [],
+   "run": "20261013T144619Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 1.4,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 8.6,
+   "unstalled_median_ms": 7.0,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 7.69,
+   "wall_clock_s": 1.4
+  },
+  "tsm": {
+   "gap_between_stalls": [],
+   "host": "ip-172-31-6-60",
+   "n": 200,
+   "reports_per_s": 125.0,
+   "retry_sleeps_per_stall": [],
+   "run": "20261013T144621Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 1.6,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 9.09,
+   "unstalled_median_ms": 7.97,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 8.25,
+   "wall_clock_s": 1.6
+  }
+ },
+ "20261013T144712Z-gcp-tdx-report-rate": {
+  "tsm": {
+   "gap_between_stalls": [],
+   "host": "report-rate-tdx-2610131447",
+   "n": 200,
+   "reports_per_s": 24.39,
+   "retry_sleeps_per_stall": [],
+   "run": "20261013T144813Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 8.2,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 58.96,
+   "unstalled_median_ms": 41.77,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 43.29,
+   "wall_clock_s": 8.2
+  }
+ },
+ "20261013T144930Z-azure-sev-snp-report-rate": {
+  "azure-hcl": {
+   "gap_between_stalls": [
+    1,
+    2
+   ],
+   "host": "rr-snp",
+   "n": 200,
+   "reports_per_s": 0.802,
+   "retry_sleeps_per_stall": [
+    0,
+    1
+   ],
+   "run": "20261013T145542Z",
+   "stall_max_s": 2.12,
+   "stall_min_s_excluding_first": 1.04,
+   "stalled_indices_first": [
+    17,
+    19,
+    21
+   ],
+   "stalled_n": 111,
+   "sum_of_calls_s": 249.5,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 674.21,
+   "unstalled_median_ms": 652.18,
+   "unstalled_n": 89,
+   "unstalled_p95_ms": 661.53,
+   "wall_clock_s": 249.5
+  },
+  "azure-hcl-fresh": {
+   "every_call_above_stall_threshold": true,
+   "host": "rr-snp",
+   "max_ms": 2855.09,
+   "median_ms": 2700.89,
+   "mode": "azure-hcl-fresh",
+   "n": 100,
+   "p95_ms": 2842.21,
+   "reports_per_s": 0.441,
+   "run": "20261013T145928Z",
+   "wall_clock_s": 226.7
+  },
+  "snp-ioctl": {
+   "host": "rr-snp",
+   "mode": "snp-ioctl",
+   "n": 0,
+   "not_available": "[Errno 2] No such file or directory: '/dev/sev-guest'",
+   "run": "20261013T145928Z"
+  },
+  "tsm": {
+   "host": "rr-snp",
+   "mode": "tsm",
+   "n": 0,
+   "not_available": "[Errno 6] No such device or address: '/sys/kernel/config/tsm/report/burst-ca0099fb96dc'",
+   "run": "20261013T145928Z"
+  },
+  "vtpm-quote": {
+   "gap_between_stalls": [],
+   "host": "rr-snp",
+   "n": 200,
+   "reports_per_s": 22.472,
+   "retry_sleeps_per_stall": [],
+   "run": "20261013T145132Z",
+   "stall_max_s": null,
+   "stall_min_s_excluding_first": null,
+   "stalled_indices_first": [],
+   "stalled_n": 0,
+   "sum_of_calls_s": 8.9,
+   "timed": "ioctl alone",
+   "unstalled_max_ms": 59.37,
+   "unstalled_median_ms": 44.06,
+   "unstalled_n": 200,
+   "unstalled_p95_ms": 45.44,
+   "wall_clock_s": 8.9
+  }
+ }
+}

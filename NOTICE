@@ -1,0 +1,16 @@
+tacra-verification: the formal models and the hardware measurements behind the
+TWI SIG's work on TACRA (draft-novak-rats-tacra) and its EST profile
+(draft-novak-lamps-tacra-est).
+
+Copyright 2026 Serhii Nikolaichuk.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+these files except in compliance with the License. A copy of the License is in
+the file LICENSE.
+
+The models, the measurements and the texts were first published in
+github.com/nikolaichuk7/tacra-est and offered to the TWI SIG in
+TWI-Unified-Model/globalsign-est pull request #7; this repository is that
+contribution in a place of its own. The files under formal/results are the
+unedited output of ProVerif 2.05 (GPL-2.0-or-later), which is not part of this
+repository.

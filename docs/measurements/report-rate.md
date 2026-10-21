@@ -22,9 +22,9 @@ a new hardware report. Designs that attest a key once and sign per-session value
 with the same picture: the vTPM quote took 45.4 ms. Read right after the write, only 55 of 200 HCL reports carried the
 new data.
 
-## The same runs from this repository (October 13, 2026)
+## The same runs with the scripts of this repository (October 13, 2026)
 
-The three scripts were run again from this repository on 13 October 2026, as a check that they work from here and
+The three scripts were run again on 13 October 2026 from the branch that became this repository, as a check that they work from here and
 that the figures hold; each run created its VM, measured, copied its results into `evidence/` and deleted the VM.
 
 | platform | path | per request | requests over 1 s | sustained | run |
@@ -69,4 +69,4 @@ detail for `azure-hcl`, and a fix to `lib-gcloud.sh` (it had reported a failed g
 of every mode the runs use is unchanged.
 
 
-By Serhii Nikolaichuk (Copyright 2026), contributed under this repository's MIT licence; first published in github.com/nikolaichuk7/tacra-est.
+By Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0 licence; first published in github.com/nikolaichuk7/tacra-est.
