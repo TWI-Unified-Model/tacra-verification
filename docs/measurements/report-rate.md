@@ -65,11 +65,11 @@ Every stall is five sleeps of the Linux guest driver's 2 s retry. Linux v7.0:
 The guest log shows nothing during a stall. We see the timing, not the host's reason.
 
 ## Limits
-- **One run each** for AWS, Azure and GCP TDX: one instance type, one region. Other types, regions or bare metal may
-  differ. Azure TDX was not measured.
+- **One instance type and one region each** for AWS, Azure and GCP TDX, measured on three days (5, 13 and 21 October 2026).
+  Other types, regions or bare metal may differ. Azure TDX was not measured.
 - **Only the request in the guest is timed:** no network and no appraisal.
 - **Azure:** a per-request value reaches the hardware report through the paravisor's HCL report, at about one report
-  every 2 to 3 s (2.0 s on 5 October, 2.7 s on 13 October). The fast per-request path is the vTPM quote.
+  every 2 to 3 s (2.0 s on 5 October, 2.7 s on 13 October, 2.0 s on 21 October). The fast per-request path is the vTPM quote.
 
 ## Reproduce
 You need your own cloud account. Each script creates one VM, runs `scripts/measure/report_burst.py` in it, copies the
@@ -81,7 +81,7 @@ results to `evidence/`, deletes the VM and records the deletion. Each run keeps 
     TEE=tdx scripts/measure/gcp-report-rate.sh us-central1-a        # GCP TDX
     python3 scripts/measure/burst_stats.py docs/measurements/evidence/<run>/<mode>.json
 
-**Provenance.** The runs were made from the development branch of github.com/nikolaichuk7/tacra-est; `code-rev.txt` in each run names its commit there. The runs of 5 October are in `evidence/` beside this file, byte for byte as copied from the machines.
+**Provenance.** The runs of 5 October were made from the development branch of github.com/nikolaichuk7/tacra-est, the runs of 13 October from the branch that became this repository, and the runs of 21 October from this repository (commit 114d01d); `code-rev.txt` in each run names its commit, and the README's Provenance section says where each commit is. All runs are in `evidence/` beside this file, byte for byte as copied from the machines.
 The scripts here are the latest versions. After the first two runs we only added the `azure-hcl-fresh` mode, per-call
 detail for `azure-hcl`, and a fix to `lib-gcloud.sh` (it had reported a failed gcloud command as success). The timing
 of every mode the runs use is unchanged.
