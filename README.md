@@ -75,26 +75,11 @@ it, copies the results into `docs/measurements/evidence/` and deletes the VM; se
     TEE=tdx scripts/measure/gcp-report-rate.sh us-central1-a
     make summary           # recompute summary.json from the runs
 
-## Provenance
+## Evidence
 
-The models, the measurements and the texts were first published in
-[nikolaichuk7/tacra-est](https://github.com/nikolaichuk7/tacra-est) under Apache-2.0 and offered
-to the TWI SIG as [TWI-Unified-Model/globalsign-est pull request #7](https://github.com/TWI-Unified-Model/globalsign-est/pull/7)
-(commit 2e08899, kept by that pull request). This repository is that tree, unchanged, except:
-
-- this README, `LICENSE`, `NOTICE`, `Makefile`, the workflow, `formal/check_results.py`,
-  `scripts/measure/summarize_runs.py` and `docs/measurements/summary.json` are new;
-- three references in `formal/README.md` and `docs/measurements/handle-lifetime.md` that pointed to
-  files of the EST server's repository now link to them at master 623c197
-  (`internal/tacra/binding.go`, `internal/tacra/backend.go`, `internal/mockca/attest.go`);
-- the licence lines of the three documents say Apache-2.0 instead of that repository's MIT.
-
-`code-rev.txt` in each run names the commit the probe was run from: for the runs of 5 October,
-commits of nikolaichuk7/tacra-est; for the runs of 13 October, 4212c338bb01, the commit of pull
-request #7's branch before those runs were added to it (its tree is 2e08899 without
-`evidence/20261013T*` and the second table of report-rate.md); for the runs of 21 October, 114d01d, the commit of this
-repository they were made from. The evidence files themselves are
-never edited; the statistics are recomputed from them.
+The files under `docs/measurements/evidence/` are the raw records of each run, byte for byte as copied from
+the machines and never edited; every figure in the tables is recomputed from them (`make summary`, checked
+by CI). `code-rev.txt` in each run names the commit of the measurement scripts the run was made with.
 
 ## Licence
 

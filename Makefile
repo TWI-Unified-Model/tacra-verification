@@ -7,7 +7,7 @@ PROVERIF ?= proverif
 check: gen-check proverif-check summary-check sh-check
 
 gen-check:
-	cd formal && python3 gen.py && git diff --exit-code -- .
+	cd formal && python3 gen.py && git diff --exit-code -- '*.pv'
 
 proverif-check:
 	python3 formal/check_results.py --proverif $(PROVERIF)

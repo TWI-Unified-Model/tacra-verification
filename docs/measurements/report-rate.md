@@ -4,7 +4,7 @@ Each run asks a fresh VM for N fresh attestation reports in a row, one at a time
 This is the cost a protocol pays when every session or re-attestation binds its own value (a nonce or a binder) into
 a new hardware report. Designs that attest a key once and sign per-session values with it do not pay it.
 
-## Results (October 5, 2026, plus the September GCP runs)
+## Results (October 5, 2026)
 
 | platform | path | per request | requests over 1 s | sustained | run |
 |---|---|---|---|---|---|
@@ -12,7 +12,6 @@ a new hardware report. Designs that attest a key once and sign per-session value
 | same VM | configfs-tsm | median 7.87 ms, max 8.83 ms | 0 of 200 | 133/s | same |
 | GCP SEV-SNP, n2d-standard-2, us-central1-c | SNP_GET_EXT_REPORT | median 7.67 ms | 19 of 200, every tenth, 10.23–10.24 s | 1.0/s | `evidence/20261005T144514Z-gcp-sev-snp-report-rate` |
 | same VM | configfs-tsm | median 7.96 ms | 20 of 200, every tenth, 10.23 s | 0.97/s | same |
-| GCP SEV-SNP, five runs of September 26 and 30 | SNP_GET_EXT_REPORT | median 7.6–8.2 ms | 20 of 200 each, every tenth, 10.22–10.26 s | 0.97/s | drill D8 of the runs `20260926T183015Z`, `20260926T185214Z`, `20260926T202045Z`, `20260926T234444Z`, `20260930T171748Z` in github.com/nikolaichuk7/tacra-est (`evidence/`) |
 | GCP TDX, c3-standard-4, us-central1-a | configfs-tsm (TD quote) | median 38.8 ms, max 43.4 ms | 0 of 200 | 25/s | `evidence/20261005T145025Z-gcp-tdx-report-rate` |
 | Azure SEV-SNP (paravisor), Standard_DC2as_v5, westeurope | vTPM quote with a 32-byte nonce (persistent AK 0x81000003) | median 45.7 ms, of which about 8 ms is starting tpm2-tools | 0 of 200 | 20/s | `evidence/20261005T143829Z-azure-sev-snp-report-rate` |
 | same VM | write 64 bytes to NV 0x01400002, read the HCL report at 0x01400001 until it carries them | median 2,017 ms (100 of 100; about 67 reads each) | n/a | about 0.5/s | same, `azure-hcl-fresh.json` |
@@ -22,10 +21,9 @@ a new hardware report. Designs that attest a key once and sign per-session value
 with the same picture: the vTPM quote took 45.4 ms. Read right after the write, only 55 of 200 HCL reports carried the
 new data.
 
-## The same runs with the scripts of this repository (October 13, 2026)
+## The same runs (October 13, 2026)
 
-The three scripts were run again on 13 October 2026 from the branch that became this repository, as a check that they work from here and
-that the figures hold; each run created its VM, measured, copied its results into `evidence/` and deleted the VM.
+The three scripts were run again on 13 October 2026, as a check that the figures hold; each run created its VM, measured, copied its results into `evidence/` and deleted the VM.
 
 | platform | path | per request | requests over 1 s | sustained | run |
 |---|---|---|---|---|---|
@@ -38,10 +36,9 @@ that the figures hold; each run created its VM, measured, copied its results int
 | same VM | write 64 bytes to NV 0x01400002, read the HCL report at 0x01400001 until it carries them | median 2,701 ms (100 of 100; 2,017 ms on 5 October) | n/a | about 0.4/s | same, `azure-hcl-fresh.json` |
 | same VM | `/dev/sev-guest`, configfs-tsm | not available to the guest, as on 5 October | | | same |
 
-## The same runs from this repository (October 21, 2026)
+## The same runs (October 21, 2026)
 
-The three scripts were run again on 21 October 2026 from this repository (commit 114d01d, which `code-rev.txt` in each run
-names), after the move from TWI-Unified-Model/globalsign-est pull request #7, as a check that they work from here; each run
+The three scripts were run again on 21 October 2026 from this repository, as a check that they work from here; each run
 created its VM, measured, copied its results into `evidence/` and deleted the VM (0 instances and 0 resource groups left in the
 three accounts afterwards).
 
@@ -81,10 +78,10 @@ results to `evidence/`, deletes the VM and records the deletion. Each run keeps 
     TEE=tdx scripts/measure/gcp-report-rate.sh us-central1-a        # GCP TDX
     python3 scripts/measure/burst_stats.py docs/measurements/evidence/<run>/<mode>.json
 
-**Provenance.** The runs of 5 October were made from the development branch of github.com/nikolaichuk7/tacra-est, the runs of 13 October from the branch that became this repository, and the runs of 21 October from this repository (commit 114d01d); `code-rev.txt` in each run names its commit, and the README's Provenance section says where each commit is. All runs are in `evidence/` beside this file, byte for byte as copied from the machines.
+**Provenance.** `code-rev.txt` in each run names the commit of the measurement scripts the run was made with. All runs are in `evidence/` beside this file, byte for byte as copied from the machines.
 The scripts here are the latest versions. After the first two runs we only added the `azure-hcl-fresh` mode, per-call
 detail for `azure-hcl`, and a fix to `lib-gcloud.sh` (it had reported a failed gcloud command as success). The timing
 of every mode the runs use is unchanged.
 
 
-By Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0 licence; first published in github.com/nikolaichuk7/tacra-est.
+By Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0 licence.
