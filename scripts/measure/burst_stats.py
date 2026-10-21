@@ -10,10 +10,9 @@ is compared with the Linux guest driver's retry sleep: on a host "busy" answer t
 SNP_REQ_RETRY_DELAY = 2 s and retries, and gives up after SNP_REQ_MAX_RETRY_DURATION = 60 s
 (Linux 7.0, arch/x86/include/asm/sev.h lines 159-160; arch/x86/coco/sev/core.c lines 1831-1841).
 
-One exception. The first hardware run, 20260926T165938Z (github.com/nikolaichuk7/tacra-est, evidence/20260926T165724Z-gcp-sev-snp),
-ran the code of commit 8836e0f, whose Attester downloaded AMD's certificate chain from the KDS for
-every report and whose burst timed the whole call; its per-report times are the implementation's
-of that day, not the chip's. The bare ioctl is timed from commit 78dc60f on.
+One exception. The first hardware run, 20260926T165938Z (not among the runs of this repository), timed the
+whole call, whose Attester downloaded AMD's certificate chain from the KDS for every report; its per-report
+times are the implementation's of that day, not the chip's. Every later run times the bare ioctl.
 """
 WHOLE_CALL_RUNS = {"20260926T165938Z"}
 import json
