@@ -43,5 +43,3 @@ which it does not cover: an originator that must cover it sets more. The EST ser
 The report request alone was timed, in the guest: no network, no appraisal. One run each on AWS, Azure and
 Google Cloud TDX, one instance type and region each; bare metal and other hosts may differ. The guest log shows
 nothing during a stall: the timing is seen, not the host's reason.
-
-By Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0 licence.

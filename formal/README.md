@@ -195,6 +195,3 @@ on macOS with OCaml 5 and are what the tool printed, unedited, with `###` header
 the version, the date and each model.
 The file `proverif-20261013T142417Z-rerun.txt` is the full output of the rerun of 13 October
 2026 on the models as generated that day: the same 62 verdicts.
-
-The models and this text are by Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0
-licence.

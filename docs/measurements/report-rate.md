@@ -82,6 +82,3 @@ results to `evidence/`, deletes the VM and records the deletion. Each run keeps 
 The scripts here are the latest versions. After the first two runs we only added the `azure-hcl-fresh` mode, per-call
 detail for `azure-hcl`, and a fix to `lib-gcloud.sh` (it had reported a failed gcloud command as success). The timing
 of every mode the runs use is unchanged.
-
-
-By Serhii Nikolaichuk (Copyright 2026), under this repository's Apache-2.0 licence.

@@ -83,6 +83,5 @@ by CI). `code-rev.txt` in each run names the commit of the measurement scripts t
 
 ## Licence
 
-Apache-2.0, as [TWI-Unified-Model/tacra](https://github.com/TWI-Unified-Model/tacra). Copyright
-2026 Serhii Nikolaichuk; see `NOTICE`. The files under `formal/results` are the unedited output of
+Apache-2.0, as [TWI-Unified-Model/tacra](https://github.com/TWI-Unified-Model/tacra). The files under `formal/results` are the unedited output of
 ProVerif, which is not part of this repository.
