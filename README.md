@@ -16,7 +16,7 @@ the runs they come from.
 | Formal model | which bindings stop which substitution by the untrusted conduit, and what each guarantee rests on: twenty-four ProVerif models, 62 recorded verdicts | [formal/README.md](formal/README.md) |
 | Report rate | how long a confidential VM takes to produce fresh Evidence on AWS, Azure and Google Cloud, SEV-SNP and TDX, one request at a time | [docs/measurements/report-rate.md](docs/measurements/report-rate.md) |
 | Handle lifetime | why a Freshness Handle's lifetime has a floor: the GHCB rate limit, the Linux guest driver's retry, every tenth report on Google Cloud SEV-SNP waiting 10.2 s | [docs/measurements/handle-lifetime.md](docs/measurements/handle-lifetime.md) |
-| The runs | the nine runs of 5 and 13 October 2026, byte for byte as copied from the machines, never edited | [docs/measurements/evidence/](docs/measurements/evidence/) |
+| The runs | the thirteen runs of 5, 13 and 21 October 2026, byte for byte as copied from the machines, never edited | [docs/measurements/evidence/](docs/measurements/evidence/) |
 | Repeating them | the probe and the three cloud scripts; each creates one VM, measures, copies the results here and deletes the VM | [scripts/measure/](scripts/measure/) |
 
 ## Repository structure
@@ -92,7 +92,8 @@ to the TWI SIG as [TWI-Unified-Model/globalsign-est pull request #7](https://git
 `code-rev.txt` in each run names the commit the probe was run from: for the runs of 5 October,
 commits of nikolaichuk7/tacra-est; for the runs of 13 October, 4212c338bb01, the commit of pull
 request #7's branch before those runs were added to it (its tree is 2e08899 without
-`evidence/20261013T*` and the second table of report-rate.md). The evidence files themselves are
+`evidence/20261013T*` and the second table of report-rate.md); for the runs of 21 October, 114d01d, the commit of this
+repository they were made from. The evidence files themselves are
 never edited; the statistics are recomputed from them.
 
 ## Licence

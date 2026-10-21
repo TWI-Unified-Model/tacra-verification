@@ -1,0 +1,1 @@
+{"mode": "tsm", "n": 200, "median_ms": 38.93, "max_ms": 55.5, "stalls": 0, "errors": [], "provider": "tdx_guest"}

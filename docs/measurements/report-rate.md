@@ -38,6 +38,24 @@ that the figures hold; each run created its VM, measured, copied its results int
 | same VM | write 64 bytes to NV 0x01400002, read the HCL report at 0x01400001 until it carries them | median 2,701 ms (100 of 100; 2,017 ms on 5 October) | n/a | about 0.4/s | same, `azure-hcl-fresh.json` |
 | same VM | `/dev/sev-guest`, configfs-tsm | not available to the guest, as on 5 October | | | same |
 
+## The same runs from this repository (October 21, 2026)
+
+The three scripts were run again on 21 October 2026 from this repository (commit 114d01d, which `code-rev.txt` in each run
+names), after the move from TWI-Unified-Model/globalsign-est pull request #7, as a check that they work from here; each run
+created its VM, measured, copied its results into `evidence/` and deleted the VM (0 instances and 0 resource groups left in the
+three accounts afterwards).
+
+| platform | path | per request | requests over 1 s | sustained | run |
+|---|---|---|---|---|---|
+| AWS SEV-SNP, c6a.large, us-east-2a | SNP_GET_EXT_REPORT | median 7.28 ms, max 8.26 ms | 0 of 200 | 133/s | `evidence/20261021T012158Z-aws-sev-snp-report-rate` |
+| same VM | configfs-tsm | median 7.99 ms, max 9.06 ms | 0 of 200 | 125/s | same |
+| GCP SEV-SNP, n2d-standard-2, us-central1-c | SNP_GET_EXT_REPORT | median 7.97 ms | 19 of 200, every tenth, 10.23–10.24 s | 1.021/s | `evidence/20261021T012158Z-gcp-sev-snp-report-rate` |
+| same VM | configfs-tsm | median 7.97 ms | 20 of 200, every tenth, 10.22–10.23 s | 0.97/s | same |
+| GCP TDX, c3-standard-4, us-central1-a | configfs-tsm (TD quote) | median 38.94 ms, max 55.52 ms | 0 of 200 | 25/s | `evidence/20261021T012158Z-gcp-tdx-report-rate` |
+| Azure SEV-SNP (paravisor), Standard_DC2as_v5, westeurope | vTPM quote with a 32-byte nonce (persistent AK 0x81000003) | median 44.45 ms, max 182.77 ms | 0 of 200 | 22/s | `evidence/20261021T012158Z-azure-sev-snp-report-rate` |
+| same VM | write 64 bytes to NV 0x01400002, read the HCL report at 0x01400001 until it carries them | median 2,019 ms (100 of 100; 2,701 ms on 13 October, 2,017 ms on 5 October) | n/a | about 0.5/s | same, `azure-hcl-fresh.json` |
+| same VM | `/dev/sev-guest`, configfs-tsm | not available to the guest, as on 5 and 13 October | | | same |
+
 ## Why the GCP SEV-SNP stalls are 10 s
 Every stall is five sleeps of the Linux guest driver's 2 s retry. Linux v7.0:
 - `arch/x86/include/asm/sev.h`, lines 159–160: `SNP_REQ_MAX_RETRY_DURATION (60*HZ)` and `SNP_REQ_RETRY_DELAY (2*HZ)`;
