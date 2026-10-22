@@ -25,7 +25,7 @@ the runs they come from.
 .
 ├── formal/                      # the ProVerif models, their generator and the tool's output
 │   ├── gen.py                   # writes the twenty-four models from one template
-│   ├── target_first.py          # the same models with the Target before the identifier
+│   ├── target_first.py          # the same models with the Target before the Relying Party identifier
 │   ├── check_results.py         # runs ProVerif and compares the verdicts with the recorded run
 │   ├── *.pv                     # the models, as gen.py writes them
 │   └── results/                 # ProVerif 2.05 output, unedited, of 26 and 30 September and 13 October 2026

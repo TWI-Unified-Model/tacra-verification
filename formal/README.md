@@ -117,7 +117,7 @@ modelled, the timestamp is a fresh public value). Results:
 What the rows show. Whenever the freshness value is not tied to one server's session, whether a
 shared epoch, a Handle any server accepts, or the Attester's own timestamp, the same Evidence is
 accepted by both servers unless a Relying Party identifier is bound (U1 false), and binding it from either source
-restores U1. As with a fresh Handle, only an identifier from the Attester's own configuration gives
+restores U1. As with a fresh Handle, only a Relying Party identifier from the Attester's own configuration gives
 Q1. These nine models also set `preciseActions`; without it, U1 of the three
 `rrp-from-initiate` models comes back "cannot be proved", with no attack trace, and every other
 result is the same.
@@ -166,7 +166,7 @@ output: from `AttesterIntends(id1, tA, csr)` and any Target `t` the attacker kno
 `Issued(id1, t, csr)`.
 
 Retrieval, base mode. `pk(cek)` travels in the Evidence, so the attacker has it; it encrypts a
-secret of its own to `pk(cek)`; the Attester decrypts and uses it. In the trace: `AttesterUses(id1,
+its own secret to `pk(cek)`; the Attester decrypts and uses it. In the trace: `AttesterUses(id1,
 s)` for an `s` no Vault released.
 
 ## What closes them in the models
