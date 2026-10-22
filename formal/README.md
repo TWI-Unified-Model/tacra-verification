@@ -9,9 +9,10 @@ that change between them. `results/` holds the ProVerif 2.05 output, unedited, o
 How the names map to the drafts and to the TWI SIG's EST server (TWI-Unified-Model/globalsign-est, master 623c197 of 13 October 2026):
 
 - `srv`, `sid`, `id` in a model, and "server" in the tables below, are the identifier of the
-  Relying Party that will rely on the Evidence: the `rp_id` of TACRA Section 4.5 as it stood until
-  22 October 2026, when the identifier left the binding (TheBankster/rats-tacra master c2c378e). The models were written when the EST profile called it `server_id`; the name in the
-  models was kept so that the recorded results stay the tool's own.
+  Relying Party that will rely on the Evidence, which the binding of TACRA Section 4.5 carried until
+  22 October 2026 (TheBankster/rats-tacra master c2c378e). The models were written when the EST
+  profile called it `server_id`; the name in the models was kept so that the recorded results stay
+  the tool's own.
 - The `-norrp` models bind the freshness element, the Target and the subject and no identifier:
   `h((n, tgt, csr))` with a Handle, `h((ep, tgt, csr))` with an epoch marker, `h((ts, tgt, csr))`
   with the Attester's timestamp. That is the binding the EST server computes
