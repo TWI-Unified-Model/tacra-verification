@@ -9,16 +9,16 @@ that change between them. `results/` holds the ProVerif 2.05 output, unedited, o
 How the names map to the drafts and to the TWI SIG's EST server (TWI-Unified-Model/globalsign-est, master 623c197 of 13 October 2026):
 
 - `srv`, `sid`, `id` in a model, and "server" in the tables below, are the identifier of the
-  Relying Party that will rely on the Evidence: the `rp_id` of TACRA Section 4.5 as that section
-  stands. The models were written when the EST profile called it `server_id`; the name in the
+  Relying Party that will rely on the Evidence: the `rp_id` of TACRA Section 4.5 as it stood until
+  22 October 2026, when the identifier left the binding (TheBankster/rats-tacra master c2c378e). The models were written when the EST profile called it `server_id`; the name in the
   models was kept so that the recorded results stay the tool's own.
 - The `-norrp` models bind the freshness element, the Target and the subject and no identifier:
   `h((n, tgt, csr))` with a Handle, `h((ep, tgt, csr))` with an epoch marker, `h((ts, tgt, csr))`
   with the Attester's timestamp. That is the binding the EST server computes
-  ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)), as the group decided on 6 and 11 October 2026; whether the
-  identifier returns to Section 4.5 is TheBankster/rats-tacra#20.
+  ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)), as the group decided on 6 and 11 October 2026 and as
+  Section 4.5 says since 22 October 2026 (TheBankster/rats-tacra master c2c378e).
 - `enrollment-bind.pv` and the `-rrp-configured` models bind the identifier as well,
-  `h((n, sid, tgt, csr))`: Section 4.5 as it stands. `enrollment-nobind.pv`, `h((n, csr))`, is
+  `h((n, sid, tgt, csr))`: Section 4.5 as it stood until 22 October 2026. `enrollment-nobind.pv`, `h((n, csr))`, is
   the binding of draft -00 of the EST profile, before the Target was bound.
 - The retrieval models bind the identifier, `h((n, srv, tgt, pk(cek)))`; `retrieval-auth.pv` is
   the container with origin authentication (HPKE `mode_auth`), `retrieval-base.pv` the container
@@ -39,7 +39,7 @@ stays secret.
 |---|---|---|---|---|---|---|
 | `enrollment-nobind.pv` | draft -00: Handle and CSR | false | false | false | | |
 | `enrollment-serveronly.pv` | Handle, server_id, CSR (no Target) | true | **false** | false | | |
-| `enrollment-bind.pv` | TACRA 4.5 as it stands: Handle, the identifier, Target, CSR | true | true | true | | |
+| `enrollment-bind.pv` | TACRA 4.5 until 22 October 2026: Handle, the identifier, Target, CSR | true | true | true | | |
 | `enrollment-bind-nocompare.pv` | as above, but the Attester does not compare the wire server_id; it binds the server identity from its own CAI configuration | true | true | true | | |
 | `enrollment-bind-compromised-s2.pv` | as above; server 2 and its CA key are the attacker's | | true (for server 1) | | | |
 | `enrollment-bind-tee-key-leaked.pv` | as above; the TEE attestation key has leaked | false | false | false | | |
