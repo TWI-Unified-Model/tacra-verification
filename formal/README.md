@@ -34,11 +34,16 @@ Attester for *sid* (any Target); **Q2** it was intended for *sid* and for the sa
 Attester uses was released for it by the Vault and Target it intended; **S** the Vault's secret
 stays secret.
 
+The rows below are the models that bind a Relying Party identifier as well. Section 4.5 binds none;
+the binding of Section 4.5 is the rows whose "Relying Party identifier the Attester binds" column says
+"none" in the tables of the next section. These rows are kept for what they show: with the identifier
+bound, one Evidence stays with one Relying Party.
+
 | model | binding | Q1 | Q2 | Q3 | R1 | S |
 |---|---|---|---|---|---|---|
 | `enrollment-nobind.pv` | draft -00: Handle and CSR | false | false | false | | |
 | `enrollment-serveronly.pv` | Handle, server_id, CSR (no Target) | true | **false** | false | | |
-| `enrollment-bind.pv` | Handle, the Relying Party identifier, Target, CSR | true | true | true | | |
+| `enrollment-bind.pv` | Handle, Target, CSR, and the Relying Party identifier (not in Section 4.5) | true | true | true | | |
 | `enrollment-bind-nocompare.pv` | as above, but the Attester does not compare the wire server_id; it binds the Relying Party identifier from its own CAI configuration | true | true | true | | |
 | `enrollment-bind-compromised-s2.pv` | as above; server 2 and its CA key are the attacker's | | true (for server 1) | | | |
 | `enrollment-bind-tee-key-leaked.pv` | as above; the TEE attestation key has leaked | false | false | false | | |
