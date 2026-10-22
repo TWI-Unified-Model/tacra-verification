@@ -9,24 +9,22 @@ that change between them. `results/` holds the ProVerif 2.05 output, unedited, o
 How the names map to the drafts and to the TWI SIG's EST server (TWI-Unified-Model/globalsign-est, master 623c197 of 13 October 2026):
 
 - `srv`, `sid`, `id` in a model, and "server" in the tables below, are the identifier of the
-  Relying Party that will rely on the Evidence, which the binding of TACRA Section 4.5 carried until
-  22 October 2026 (TheBankster/rats-tacra master c2c378e). The models were written when the EST
-  profile called it `server_id`; the name in the models was kept so that the recorded results stay
-  the tool's own.
+  Relying Party that will rely on the Evidence, which TACRA Section 4.5 does not bind; the models
+  that bind it show what it adds. The models call it `server_id`, the EST profile's name for it at
+  the time they were written; the recorded results keep that name.
 - The `-norrp` models bind the freshness element, the Target and the subject and no identifier:
   `h((n, tgt, csr))` with a Handle, `h((ep, tgt, csr))` with an epoch marker, `h((ts, tgt, csr))`
-  with the Attester's timestamp. That is the binding the EST server computes
-  ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)), as the group decided on 6 and 11 October 2026 and as
-  Section 4.5 says since 22 October 2026 (TheBankster/rats-tacra master c2c378e).
+  with the Attester's timestamp. That is the binding of TACRA Section 4.5 and the one the EST server
+  computes ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)).
 - `enrollment-bind.pv` and the `-rrp-configured` models bind the identifier as well,
-  `h((n, sid, tgt, csr))`: Section 4.5 as it stood until 22 October 2026. `enrollment-nobind.pv`, `h((n, csr))`, is
+  `h((n, sid, tgt, csr))`, which Section 4.5 does not; they show what the identifier adds. `enrollment-nobind.pv`, `h((n, csr))`, is
   the binding of draft -00 of the EST profile, before the Target was bound.
 - The retrieval models bind the identifier, `h((n, srv, tgt, pk(cek)))`; `retrieval-auth.pv` is
   the container with origin authentication (HPKE `mode_auth`), `retrieval-base.pv` the container
   of draft -00, encrypted to CEKpub alone.
 
 The verdicts of the `-norrp` rows are what the measurements on hardware found for that binding
-(TheBankster/rats-tacra#20, 7–8 October 2026): without an identifier, the same Evidence is accepted
+(TheBankster/rats-tacra#20): without an identifier, the same Evidence is accepted
 by two Relying Parties that share the freshness value (U1 false), and only a Handle one Relying
 Party originated keeps it to that one.
 
@@ -40,7 +38,7 @@ stays secret.
 |---|---|---|---|---|---|---|
 | `enrollment-nobind.pv` | draft -00: Handle and CSR | false | false | false | | |
 | `enrollment-serveronly.pv` | Handle, server_id, CSR (no Target) | true | **false** | false | | |
-| `enrollment-bind.pv` | TACRA 4.5 until 22 October 2026: Handle, the identifier, Target, CSR | true | true | true | | |
+| `enrollment-bind.pv` | Handle, the identifier, Target, CSR | true | true | true | | |
 | `enrollment-bind-nocompare.pv` | as above, but the Attester does not compare the wire server_id; it binds the server identity from its own CAI configuration | true | true | true | | |
 | `enrollment-bind-compromised-s2.pv` | as above; server 2 and its CA key are the attacker's | | true (for server 1) | | | |
 | `enrollment-bind-tee-key-leaked.pv` | as above; the TEE attestation key has leaked | false | false | false | | |
@@ -124,10 +122,9 @@ Q1. These nine models also set `preciseActions`; without it, U1 of the three
 `rrp-from-initiate` models comes back "cannot be proved", with no attack trace, and every other
 result is the same.
 
-## The order of the bound values (30 September 2026)
+## The order of the bound values
 
-TACRA master 912bd50 (30 September 2026) put the Target before the Relying Party identifier in the
-binding input. The models above hash the identity before the Target, as in `h((n, srv, tgt, csr))`.
+The models above hash the identity before the Target, as in `h((n, srv, tgt, csr))`.
 `target_first.py` rewrites every hashed tuple so that the Target comes first and changes nothing
 else (16 models have both values in the hash; the other 8 bind no identity or no Target). ProVerif
 on the 24 rewritten models gives the same 62 RESULT lines, model by model:
