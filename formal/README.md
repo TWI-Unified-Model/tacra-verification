@@ -9,23 +9,22 @@ that change between them. `results/` holds the ProVerif 2.05 output, unedited, o
 How the names map to the drafts and to the TWI SIG's EST server (TWI-Unified-Model/globalsign-est, master 623c197 of 13 October 2026):
 
 - `srv`, `sid`, `id` in a model, and "server" in the tables below, are the identifier of the
-  Relying Party that will rely on the Evidence: the `rp_id` of TACRA Section 4.5 as that section
-  stands. The models were written when the EST profile called it `server_id`; the name in the
-  models was kept so that the recorded results stay the tool's own.
-- The `-norrp` models bind the freshness element, the Target and the subject and no identifier:
+  Relying Party that will rely on the Evidence, which TACRA Section 4.5 does not bind; the models
+  that bind it show what it adds. The models call it `server_id`, the EST profile's name for it at
+  the time they were written; the recorded results keep that name.
+- The `-norrp` models bind the freshness element, the Target and the subject and no Relying Party identifier:
   `h((n, tgt, csr))` with a Handle, `h((ep, tgt, csr))` with an epoch marker, `h((ts, tgt, csr))`
-  with the Attester's timestamp. That is the binding the EST server computes
-  ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)), as the group decided on 6 and 11 October 2026; whether the
-  identifier returns to Section 4.5 is TheBankster/rats-tacra#20.
-- `enrollment-bind.pv` and the `-rrp-configured` models bind the identifier as well,
-  `h((n, sid, tgt, csr))`: Section 4.5 as it stands. `enrollment-nobind.pv`, `h((n, csr))`, is
+  with the Attester's timestamp. That is the binding of TACRA Section 4.5 and the one the EST server
+  computes ([`internal/tacra/binding.go`](https://github.com/TWI-Unified-Model/globalsign-est/blob/623c19764b16fa697523a6d116b4b9bc65b24e82/internal/tacra/binding.go)).
+- `enrollment-bind.pv` and the `-rrp-configured` models bind the Relying Party identifier as well,
+  `h((n, sid, tgt, csr))`, which Section 4.5 does not; they show what that identifier adds. `enrollment-nobind.pv`, `h((n, csr))`, is
   the binding of draft -00 of the EST profile, before the Target was bound.
-- The retrieval models bind the identifier, `h((n, srv, tgt, pk(cek)))`; `retrieval-auth.pv` is
+- The retrieval models bind the Relying Party identifier, `h((n, srv, tgt, pk(cek)))`; `retrieval-auth.pv` is
   the container with origin authentication (HPKE `mode_auth`), `retrieval-base.pv` the container
   of draft -00, encrypted to CEKpub alone.
 
 The verdicts of the `-norrp` rows are what the measurements on hardware found for that binding
-(TheBankster/rats-tacra#20, 7–8 October 2026): without an identifier, the same Evidence is accepted
+(TheBankster/rats-tacra#20): without a Relying Party identifier, the same Evidence is accepted
 by two Relying Parties that share the freshness value (U1 false), and only a Handle one Relying
 Party originated keeps it to that one.
 
@@ -35,12 +34,17 @@ Attester for *sid* (any Target); **Q2** it was intended for *sid* and for the sa
 Attester uses was released for it by the Vault and Target it intended; **S** the Vault's secret
 stays secret.
 
+The rows below are the models that bind a Relying Party identifier as well. Section 4.5 binds none;
+the binding of Section 4.5 is the rows whose "Relying Party identifier the Attester binds" column says
+"none" in the tables of the next section. These rows are kept for what they show: with the identifier
+bound, one Evidence stays with one Relying Party.
+
 | model | binding | Q1 | Q2 | Q3 | R1 | S |
 |---|---|---|---|---|---|---|
 | `enrollment-nobind.pv` | draft -00: Handle and CSR | false | false | false | | |
 | `enrollment-serveronly.pv` | Handle, server_id, CSR (no Target) | true | **false** | false | | |
-| `enrollment-bind.pv` | TACRA 4.5 as it stands: Handle, the identifier, Target, CSR | true | true | true | | |
-| `enrollment-bind-nocompare.pv` | as above, but the Attester does not compare the wire server_id; it binds the server identity from its own CAI configuration | true | true | true | | |
+| `enrollment-bind.pv` | Handle, Target, CSR, and the Relying Party identifier (not in Section 4.5) | true | true | true | | |
+| `enrollment-bind-nocompare.pv` | as above, but the Attester does not compare the wire server_id; it binds the Relying Party identifier from its own CAI configuration | true | true | true | | |
 | `enrollment-bind-compromised-s2.pv` | as above; server 2 and its CA key are the attacker's | | true (for server 1) | | | |
 | `enrollment-bind-tee-key-leaked.pv` | as above; the TEE attestation key has leaked | false | false | false | | |
 | `retrieval-base.pv` | draft -00: bundle encrypted to CEKpub | | | | false | true |
@@ -55,9 +59,9 @@ everything, which is the assumption the protocol rests on. In retrieval, draft -
 secret confidential; what it loses is integrity: the Attester can be made to use a secret no
 Vault released.
 
-## Where the bound identity comes from: six more models
+## Where the bound Relying Party identifier comes from: six more models
 
-These ask what the binding guarantees depending on where the Attester gets the server identity it
+These ask what the binding guarantees depending on where the Attester gets the Relying Party identifier it
 binds, from its own configuration or from the initiation response that the untrusted conduit
 delivers, and on whether the first leg returns a fresh Handle per server session or a shared
 public epoch `ep` (absent-epoch with a remote initiate). The issuing server here plays the RATS
@@ -66,7 +70,7 @@ for CSR *x* was bound by the Attester to *sid* and the same Target, and **B2** i
 **U1** no two servers issue for the same CSR and Target. Results:
 `results/proverif-20260926T232411Z-rrp-source.txt`.
 
-| model | freshness | identity the Attester binds | Q1 | B1 | B2 | U1 |
+| model | freshness | Relying Party identifier the Attester binds | Q1 | B1 | B2 | U1 |
 |---|---|---|---|---|---|---|
 | `enrollment-nonce-norrp-uniqueness.pv` | fresh Handle per server | none (the -00 binding) | (false: `enrollment-nobind.pv`) | | | true |
 | `enrollment-rrp-from-initiate.pv` | fresh Handle per server | received in the initiation response | false | true | true | true |
@@ -77,14 +81,14 @@ for CSR *x* was bound by the Attester to *sid* and the same Target, and **B2** i
 
 `enrollment-rrp-from-initiate.pv` also asks Q2 and Q3; both are false, by the same trace as Q1.
 
-What the rows show. An identity received in the initiation response keeps any one Evidence to one
+What the rows show. A Relying Party identifier received in the initiation response keeps any one Evidence to one
 server: the server the Attester bound is the only one that can issue (B1, B2). The conduit,
 however, chooses that server, so Q1 fails with a fresh Handle and with an epoch alike: it can
-initiate at S2, hand S2's response to the Attester, and S2 issues. Only an identity from the
+initiate at S2, hand S2's response to the Attester, and S2 issues. Only a Relying Party identifier from the
 Attester's own configuration gives Q1. With a fresh Handle per server session the Handle alone
-already keeps Evidence to one server (U1 holds with no identity bound); with a shared epoch it does
-not, and the same Evidence is accepted by both servers (U1 false) until either identity is bound.
-When `attest-initiate` is completed locally there is no response to take the identity from, so
+already keeps Evidence to one server (U1 holds with no Relying Party identifier bound); with a shared epoch it does
+not, and the same Evidence is accepted by both servers (U1 false) until the Relying Party identifier is bound, from either source.
+When `attest-initiate` is completed locally there is no response to take the Relying Party identifier from, so
 configuration is the only source there.
 
 These six models set ProVerif's `preciseActions`. Without it, ProVerif lets one Attester session
@@ -94,7 +98,7 @@ run, of the first five. Every other result is the same with or without the setti
 
 ## Three more sources of freshness: nine more models
 
-The same three sources of the bound identity (none, received in the initiation response, from the
+The same three sources of the bound Relying Party identifier (none, received in the initiation response, from the
 Attester's own configuration), crossed with three more ways freshness arrives: the epoch value the
 Attester receives in the initiation response (present-epoch); Handles issued by a Verifier and
 accepted by both servers (one Handle originator shared across Relying Parties, modelled with a
@@ -103,7 +107,7 @@ sent in the request and recomputed with by the server (absent-timestamp; time wi
 modelled, the timestamp is a fresh public value). Results:
 `results/proverif-20260926T233733Z-freshness-sources.txt`.
 
-| model | freshness | identity the Attester binds | Q1 | B1 | U1 |
+| model | freshness | Relying Party identifier the Attester binds | Q1 | B1 | U1 |
 |---|---|---|---|---|---|
 | `enrollment-epoch-received-norrp.pv` | epoch received in the response | none | false | | **false** |
 | `enrollment-epoch-received-rrp-from-initiate.pv` | epoch received in the response | received in the initiation response | false | true | true |
@@ -117,18 +121,17 @@ modelled, the timestamp is a fresh public value). Results:
 
 What the rows show. Whenever the freshness value is not tied to one server's session, whether a
 shared epoch, a Handle any server accepts, or the Attester's own timestamp, the same Evidence is
-accepted by both servers unless an identity is bound (U1 false), and binding either identity
-restores U1. As with a fresh Handle, only an identity from the Attester's own configuration gives
+accepted by both servers unless a Relying Party identifier is bound (U1 false), and binding it from either source
+restores U1. As with a fresh Handle, only a Relying Party identifier from the Attester's own configuration gives
 Q1. These nine models also set `preciseActions`; without it, U1 of the three
 `rrp-from-initiate` models comes back "cannot be proved", with no attack trace, and every other
 result is the same.
 
-## The order of the bound values (30 September 2026)
+## The order of the bound values
 
-TACRA master 912bd50 (30 September 2026) put the Target before the Relying Party identifier in the
-binding input. The models above hash the identity before the Target, as in `h((n, srv, tgt, csr))`.
+The models above hash the Relying Party identifier before the Target, as in `h((n, srv, tgt, csr))`.
 `target_first.py` rewrites every hashed tuple so that the Target comes first and changes nothing
-else (16 models have both values in the hash; the other 8 bind no identity or no Target). ProVerif
+else (16 models have both values in the hash; the other 8 bind no Relying Party identifier or no Target). ProVerif
 on the 24 rewritten models gives the same 62 RESULT lines, model by model:
 `results/proverif-20260930T171849Z-target-first.txt`. The order does not matter to the analysis, so
 the models are kept as they were.
@@ -168,14 +171,14 @@ output: from `AttesterIntends(id1, tA, csr)` and any Target `t` the attacker kno
 `Issued(id1, t, csr)`.
 
 Retrieval, base mode. `pk(cek)` travels in the Evidence, so the attacker has it; it encrypts a
-secret of its own to `pk(cek)`; the Attester decrypts and uses it. In the trace: `AttesterUses(id1,
+its own secret to `pk(cek)`; the Attester decrypts and uses it. In the trace: `AttesterUses(id1,
 s)` for an `s` no Vault released.
 
 ## What closes them in the models
 
 With `server_id` in the binding input, the Attester only produces Evidence when the initiation
 response names the server it is configured to use, and every server recomputes the binding with
-its own identity; a Handle from S2 combined with `id1` matches nowhere. With the Target in the
+its own Relying Party identifier; a Handle from S2 combined with `id1` matches nowhere. With the Target in the
 binding input as well, a Handle the conduit obtained for another Target does not match the
 Evidence the Attester produced for its own. With `mode_auth`, only a party holding the Vault's
 private key can produce a ciphertext the Attester will open.
@@ -185,7 +188,7 @@ private key can produce a ciphertext the Attester will open.
     python3 gen.py
     for f in *.pv; do proverif $f; done
 
-The same models with the Target before the identifier, as TACRA 4.5 orders them:
+The same models with the Target before the Relying Party identifier:
 
     python3 gen.py && python3 target_first.py /tmp/target-first
     cd /tmp/target-first && for f in *.pv; do proverif $f; done
