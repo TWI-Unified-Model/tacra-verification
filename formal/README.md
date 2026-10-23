@@ -62,7 +62,7 @@ Vault released.
 ## Where the bound Relying Party identifier comes from: six more models
 
 These ask what the binding guarantees depending on where the Attester gets the Relying Party identifier it
-binds, from its own configuration or from the initiation response that the untrusted conduit
+binds: from its own configuration or from the initiation response that the untrusted conduit
 delivers, and on whether the first leg returns a fresh Handle per server session or a shared
 public epoch `ep` (absent-epoch with a remote initiate). The issuing server here plays the RATS
 Relying Party, the Credential Authority. Two more queries: **B1** a certificate issued by *sid*
@@ -170,7 +170,7 @@ would for its own Target; S1's checks all pass and S1 issues under the conduit's
 output: from `AttesterIntends(id1, tA, csr)` and any Target `t` the attacker knows,
 `Issued(id1, t, csr)`.
 
-Retrieval, base mode. `pk(cek)` travels in the Evidence, so the attacker has it; it encrypts a
+Retrieval, base mode. `pk(cek)` travels in the Evidence, so the attacker has it; it encrypts
 its own secret to `pk(cek)`; the Attester decrypts and uses it. In the trace: `AttesterUses(id1,
 s)` for an `s` no Vault released.
 
